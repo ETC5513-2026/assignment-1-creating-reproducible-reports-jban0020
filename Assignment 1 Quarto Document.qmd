@@ -1,0 +1,23 @@
+---
+title: "Assignment 1 Quarto Document"
+author: "Josh Bannon"
+format: 
+  html: default
+  pdf: default
+editor: visual
+---
+
+```{r}
+#| echo: false
+#| message: false
+#| warning: false
+
+# R code chunk for loading libraries
+library(tidyverse)
+library(readr)
+library(ggplot2)
+library(knitr)
+library(rmarkdown)
+library(kableExtra)
+```
+
