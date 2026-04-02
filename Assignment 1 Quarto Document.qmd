@@ -7,12 +7,7 @@ format:
 editor: visual
 ---
 
-```{r}
-#| echo: false
-#| message: false
-#| warning: false
-
-# R code chunk for loading libraries
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
 library(readr)
 library(ggplot2)
@@ -21,3 +16,142 @@ library(rmarkdown)
 library(kableExtra)
 ```
 
+# **Part B: Creating a reproducible report**
+
+## **Introduction section (2 points)**
+
+**Using markdown, write a 4 sentence maximum motivation of what you are going to research and why. Make sure it is relevant to your dataset.**
+
+This report investigates whether higher marketing spend per customer leads to increased purchase amounts in an online retail setting.
+
+The dataset represents a personalised marketing campaign where spending varied across customers through channels such as advertisements, emails, and coupons.
+
+Understanding this relationship is important for evaluating the effectiveness and efficiency of marketing investment.
+
+The findings will help determine whether increased spending generates meaningful returns or leads to diminishing benefits.
+
+## **Research Question section (2 points)**
+
+**Using markdown, discuss in 3 sentences maximum, the specific question that you are going to investigate or answer in this report using your selected data.**
+
+This report examines whether higher marketing spend per customer leads to greater purchase amounts.
+
+Specifically, it investigates the relationship between the amount spent on personalized marketing efforts and the revenue generated from each customer.
+
+The analysis aims to determine whether increased spending results in higher returns or diminishing effectiveness.
+
+## **Dataset Introduction section (3 points)**
+
+**In this section, briefly describe your data (i.e. what the data is measuring or recording) in five sentences maximum using markdown.**
+
+The dataset records customer-level information from a personalised marketing campaign, including marketing spend, purchase amount, and number of visits.
+
+The key variables of interest are marketing_spend, which represents the amount spent targeting each customer, and purchase_amount, which reflects the revenue generated from each customer.
+
+Additional variables such as visits, customer segment, and signup date provide further context on customer activity and characteristics but are not overly significant to this data set.
+
+Before analysis, the dataset was cleaned by - Removed rows with missing values in purchase amount because we're measuring how higher marketing spend leads to higher purchase amount -standardising date formats -formatting numerical formats Irrelivant variables such as segment and notes were excluded due to their insignificance and irrelivance
+
+To do this, you will need to clean your dataset. Include a description of this cleaning process (not the code) in the report. The code to clean the dataset must be included in the Quarto file, but not in the report.
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+#Load in the data
+data <- read_csv("data/32592582_Joshua Bannon.csv")
+```
+#Initial Look at the data
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+glimpse(data)
+```
+
+# Clean data
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+data <- data %>%
+  drop_na(marketing_spend, purchase_amount)
+```
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+data <- data %>%
+  mutate(
+    marketing_spend = as.numeric(marketing_spend),
+    purchase_amount = as.numeric(purchase_amount),
+    visits = as.numeric(visits),
+    signup_date = as.Date(signup_date),
+    segment = as.factor(segment)) %>% 
+  select(-notes) %>%
+  distinct()
+```
+
+## **Dataset Description subsection (5 points)**
+
+**Create a subsection that will report details about your data. You must include the size of the dataset such as the number of observations, variables and variable types. You must include a sentence that includes inline R code describing the number of variables and observations in your dataset.**
+
+The dataset contains **`r nrow(data)`** observations and **`r ncol(data)`** variables, capturing customer-level information from a personalised marketing campaign.
+
+The dataset includes a mix of numeric variables (e.g., marketing_spend, purchase_amount, visits), a categorical variable (segment), and a date variable (signup_date).
+
+**Create two other summaries of your data, one as a plot and one as a table. Examples include counts of certain variables in groups, or summary statistics of numeric variables. Make sure these summaries are providing a broader context to the report and are not just arbitrary commentaries.**
+
+```{r}
+data %>%
+  summarise(
+    avg_spend = mean(marketing_spend),
+    avg_purchase = mean(purchase_amount),
+    avg_visits = mean(visits)
+  )
+```
+
+```{r}
+data %>%
+  group_by(segment) %>%
+  summarise(avg_purchase = mean(purchase_amount))
+```
+
+```{r}
+summary(data)
+```
+
+```{r}
+ggplot(data, aes(x = marketing_spend)) +
+  geom_histogram(bins = 20) +
+  labs(
+    title = "Distribution of Marketing Spend",
+    x = "Marketing Spend",
+    y = "Count"
+)
+```
+
+# **Results Section**
+
+**Using visualisations of the data, discuss the answer to your research questions. You must:** **Create 2 figures maximum of your data that will help you answer your research question. Each figure must have a caption using the options inside the R code chunk. Create the figures using the ggplot2 package. The figures must have captions, and must be referred to in the text of the results section.**
+
+```{r}
+ggplot(data, aes(x = marketing_spend, y = purchase_amount)) +
+  geom_point(alpha = 0.7) +
+  geom_smooth(method = "lm", se = TRUE) +
+  labs(
+    x = "Marketing Spend",
+    y = "Purchase Amount"
+  )
+```
+
+```{r}
+data <- data %>%
+  mutate(
+    spend_group = case_when(
+      marketing_spend < quantile(marketing_spend, 0.33) ~ "Low",
+      marketing_spend < quantile(marketing_spend, 0.67) ~ "Medium",
+      TRUE ~ "High"
+    )
+  )
+```
+
+```{r}
+ggplot(data, aes(x = spend_group, y = purchase_amount)) +
+  geom_boxplot() +
+  labs(
+    x = "Marketing Spend Group",
+    y = "Purchase Amount"
+  )
+```
+
+**As well as the figures, you must also include a paragraph describing these results and how they link back to your research question. Remember, you can use inline code to extract certain numbers automatically.**
