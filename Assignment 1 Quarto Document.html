@@ -109,21 +109,21 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
+<section id="brief" class="level2">
+<h2 class="anchored" data-anchor-id="brief">Brief</h2>
+<p>You are the Head of Marketing for an online retailer. Over the last quarter we ran a personalised marketing campaign that varied how much we spent contacting individual customers (ads, emails, coupons). I want you to treat the data as the canonical record of that campaign and answer one question: did higher marketing spend per customer lead to higher purchase amounts?</p>
+</section>
 <section id="part-b-creating-a-reproducible-report" class="level1">
 <h1><strong>Part B: Creating a reproducible report</strong></h1>
-<section id="introduction-section-2-points" class="level2">
-<h2 class="anchored" data-anchor-id="introduction-section-2-points"><strong>Introduction section (2 points)</strong></h2>
-<p><strong>Using markdown, write a 4 sentence maximum motivation of what you are going to research and why. Make sure it is relevant to your dataset.</strong></p>
-<p>This report investigates whether higher marketing spend per customer leads to increased purchase amounts in an online retail setting.</p>
-<p>The dataset represents a personalised marketing campaign where spending varied across customers through channels such as advertisements, emails, and coupons.</p>
-<p>Understanding this relationship is important for evaluating the effectiveness and efficiency of marketing investment.</p>
-<p>The findings will help determine whether increased spending generates meaningful returns or leads to diminishing benefits.</p>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction"><strong>Introduction</strong></h2>
+<p>This report investigates whether higher marketing spend per customer leads to increased purchase amounts in an online retail setting. The dataset represents a personalised marketing campaign where spending varied across customers through channels such as advertisements, emails, and coupons. Businesses often face uncertainty in determining how much to invest in marketing to maximise returns without overspending. The findings will help determine whether increased spending generates meaningful returns or leads to diminishing benefits.</p>
 </section>
-<section id="research-question-section-2-points" class="level2">
-<h2 class="anchored" data-anchor-id="research-question-section-2-points"><strong>Research Question section (2 points)</strong></h2>
+<section id="research-question" class="level2">
+<h2 class="anchored" data-anchor-id="research-question"><strong>Research Question </strong></h2>
 <p><strong>Using markdown, discuss in 3 sentences maximum, the specific question that you are going to investigate or answer in this report using your selected data.</strong></p>
 <p>This report examines whether higher marketing spend per customer leads to greater purchase amounts.</p>
-<p>Specifically, it investigates the relationship between the amount spent on personalized marketing efforts and the revenue generated from each customer.</p>
+<p>Specifically, it investigates the relationship between the amount spent on personalised marketing efforts and the revenue generated from each customer, motivated by the need for businesses to optimise marketing investment decisions.</p>
 <p>The analysis aims to determine whether increased spending results in higher returns or diminishing effectiveness.</p>
 </section>
 <section id="dataset-introduction-section-3-points" class="level2">
@@ -152,35 +152,26 @@ $ notes           &lt;chr&gt; "returned", NA, "N/A", NA, NA, NA, NA, NA, "N/A", 
 </section>
 <section id="clean-data" class="level1">
 <h1>Clean data</h1>
-<p>data &lt;- data %&gt;% drop_na(marketing_spend, purchase_amount) %&gt;% mutate( marketing_spend = as.numeric(marketing_spend), purchase_amount = as.numeric(purchase_amount), visits = as.numeric(visits), signup_date = as.Date(signup_date), segment = as.factor(segment) ) %&gt;% select(-notes) %&gt;% distinct()</p>
-<pre><code>
-## **Dataset Description subsection (5 points)**
-
-**Create a subsection that will report details about your data. You must include the size of the dataset such as the number of observations, variables and variable types. You must include a sentence that includes inline R code describing the number of variables and observations in your dataset.**
-
-The dataset contains **132** observations and **6** variables, capturing customer-level information from a personalised marketing campaign.
-
-The dataset includes a mix of numeric variables (e.g., marketing_spend, purchase_amount, visits), a categorical variable (segment), and a date variable (signup_date).
-
-**Create two other summaries of your data, one as a plot and one as a table. Examples include counts of certain variables in groups, or summary statistics of numeric variables. Make sure these summaries are providing a broader context to the report and are not just arbitrary commentaries.**
-
-
-::: {.cell}
-
-```{.r .cell-code}
-data %&gt;%
-  summarise(
-    avg_spend = mean(marketing_spend),
-    avg_purchase = mean(purchase_amount),
-    avg_visits = mean(visits)
-  )</code></pre>
+<section id="dataset-description-subsection-5-points" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-description-subsection-5-points"><strong>Dataset Description subsection (5 points)</strong></h2>
+<p><strong>Create a subsection that will report details about your data. You must include the size of the dataset such as the number of observations, variables and variable types. You must include a sentence that includes inline R code describing the number of variables and observations in your dataset.</strong></p>
+<p>The dataset contains <strong>132</strong> observations and <strong>6</strong> variables, capturing customer-level information from a personalised marketing campaign.</p>
+<p>The dataset includes a mix of numeric variables (e.g., marketing_spend, purchase_amount, visits), a categorical variable (segment), and a date variable (signup_date).</p>
+<p><strong>Create two other summaries of your data, one as a plot and one as a table. Examples include counts of certain variables in groups, or summary statistics of numeric variables. Make sure these summaries are providing a broader context to the report and are not just arbitrary commentaries.</strong></p>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_spend =</span> <span class="fu">mean</span>(marketing_spend),</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_purchase =</span> <span class="fu">mean</span>(purchase_amount),</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_visits =</span> <span class="fu">mean</span>(visits)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 1 × 3
   avg_spend avg_purchase avg_visits
       &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;
 1      152.         146.       5.33</code></pre>
 </div>
-<p>:::</p>
+</div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(segment) <span class="sc">%&gt;%</span></span>
@@ -231,6 +222,7 @@ data %&gt;%
 </div>
 </div>
 </div>
+</section>
 </section>
 <section id="results-section" class="level1">
 <h1><strong>Results Section</strong></h1>

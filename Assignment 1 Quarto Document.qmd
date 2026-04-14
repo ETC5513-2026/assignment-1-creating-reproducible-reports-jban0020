@@ -15,28 +15,21 @@ library(knitr)
 library(rmarkdown)
 library(kableExtra)
 ```
+## Brief
+You are the Head of Marketing for an online retailer. Over the last quarter we ran a personalised marketing campaign that varied how much we spent contacting individual customers (ads, emails, coupons). I want you to treat the data as the canonical record of that campaign and answer one question: did higher marketing spend per customer lead to higher purchase amounts?
 
 # **Part B: Creating a reproducible report**
 
-## **Introduction section (2 points)**
+## **Introduction**
+This report investigates whether higher marketing spend per customer leads to increased purchase amounts in an online retail setting. The dataset represents a personalised marketing campaign where spending varied across customers through channels such as advertisements, emails, and coupons. Businesses often face uncertainty in determining how much to invest in marketing to maximise returns without overspending. The findings will help determine whether increased spending generates meaningful returns or leads to diminishing benefits.
 
-**Using markdown, write a 4 sentence maximum motivation of what you are going to research and why. Make sure it is relevant to your dataset.**
-
-This report investigates whether higher marketing spend per customer leads to increased purchase amounts in an online retail setting.
-
-The dataset represents a personalised marketing campaign where spending varied across customers through channels such as advertisements, emails, and coupons.
-
-Understanding this relationship is important for evaluating the effectiveness and efficiency of marketing investment.
-
-The findings will help determine whether increased spending generates meaningful returns or leads to diminishing benefits.
-
-## **Research Question section (2 points)**
+## **Research Question **
 
 **Using markdown, discuss in 3 sentences maximum, the specific question that you are going to investigate or answer in this report using your selected data.**
 
 This report examines whether higher marketing spend per customer leads to greater purchase amounts.
 
-Specifically, it investigates the relationship between the amount spent on personalized marketing efforts and the revenue generated from each customer.
+Specifically, it investigates the relationship between the amount spent on personalised marketing efforts and the revenue generated from each customer, motivated by the need for businesses to optimise marketing investment decisions.
 
 The analysis aims to determine whether increased spending results in higher returns or diminishing effectiveness.
 
