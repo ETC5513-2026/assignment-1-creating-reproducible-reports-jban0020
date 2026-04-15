@@ -56,7 +56,7 @@ data <- data %>%
 
 ## **Dataset Description**
 
-The dataset contains **`r nrow(data)`** observations and **`r ncol(data)`** variables, capturing customer-level information from a personalised marketing campaign. It includes a mix of numeric variables (e.g., marketing_spend, purchase_amount, visits), a categorical variable (segment), and a date variable (signup_date). The segment variable categorises customers into groups such as Consumer, Enterprise, and SMB, enabling analysis of differences in marketing effectiveness and purchasing behaviour across customer types. Marketing spend ranges from **$`r min(data$marketing_spend)`** to **$`r max(data$marketing_spend)`**, while purchase amounts range from **$`r min(data$purchase_amount)`** to **$`r max(data$purchase_amount)`**. Customer visits range from **`r min(data$visits)`** to **`r max(data$visits)`**.
+The dataset contains **`r nrow(data)`** observations and **`r ncol(data)`** variables, capturing customer-level information from a personalised marketing campaign. It includes a mix of numeric variables (e.g., marketing_spend, purchase_amount, visits), a categorical variable (segment), and a date variable (signup_date). The segment variable categorises customers into groups such as Consumer, Enterprise, and SMB, enabling analysis of differences in marketing effectiveness and purchasing behaviour across customer types. Marketing spend ranges from $`r min(data$marketing_spend)`** to **$`r max(data$marketing_spend)`**, while purchase amounts range from **$`r min(data$purchase_amount)` to $`r max(data$purchase_amount)`**. Customer visits range from **`r min(data$visits)`** to **`r max(data$visits)\`.
 
 ```{r echo=FALSE, message=FALSE}
 #| label: tbl-summary
@@ -109,7 +109,7 @@ ggplot(data, aes(x = marketing_spend, y = purchase_amount, colour = segment)) +
   theme(plot.title = element_text(face = "bold"))
 ```
 
-@fig-curved provides a clearer view of the underlying trends by smoothing the relationship between marketing spend and purchase amount for each segment. The Consumer and SMB segments display relatively steady increases in purchase amount as marketing spend rises, with average purchase amounts of **$`r round(mean(data$purchase_amount[data$segment == "Consumer"]), 2)`** and **$`r round(mean(data$purchase_amount[data$segment == "SMB"]), 2)`**, respectively. In contrast, the Enterprise segment shows a less consistent pattern, with a flatter trend at mid-level spend and a lower average purchase amount of **$`r round(mean(data$purchase_amount[data$segment == "Enterprise"]), 2)`**, before increasing more sharply at higher levels. 
+@fig-curved provides a clearer view of the underlying trends by smoothing the relationship between marketing spend and purchase amount for each segment. The Consumer and SMB segments display relatively steady increases in purchase amount as marketing spend rises, with average purchase amounts of $`r round(mean(data$purchase_amount\[data$segment == "Consumer"]), 2)`** and **$`r round(mean(data$purchase_amount[data$segment == "SMB"]), 2)`, respectively. In contrast, the Enterprise segment shows a less consistent pattern, with a flatter trend at mid-level spend and a lower average purchase amount of $`r round(mean(data$purchase_amount\[data\$segment == "Enterprise"\]), 2)\`, before increasing more sharply at higher levels.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 #| label: fig-curved
