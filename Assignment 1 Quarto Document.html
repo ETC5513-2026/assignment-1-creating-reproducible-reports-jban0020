@@ -6,9 +6,9 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Josh Bannon">
+<meta name="author" content="Joshua Bannon">
 
-<title>Assignment 1 Quarto Document</title>
+<title>Assignment 1</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -23,41 +23,6 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
-}
-/* CSS for syntax highlighting */
-html { -webkit-text-size-adjust: 100%; }
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -86,7 +51,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Assignment 1 Quarto Document</h1>
+<h1 class="title">Assignment 1</h1>
 </div>
 
 
@@ -96,7 +61,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Josh Bannon </p>
+             <p>Joshua Bannon </p>
           </div>
   </div>
     
@@ -109,169 +74,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="brief" class="level2">
-<h2 class="anchored" data-anchor-id="brief">Brief</h2>
-<p>You are the Head of Marketing for an online retailer. Over the last quarter we ran a personalised marketing campaign that varied how much we spent contacting individual customers (ads, emails, coupons). I want you to treat the data as the canonical record of that campaign and answer one question: did higher marketing spend per customer lead to higher purchase amounts?</p>
-</section>
-<section id="part-b-creating-a-reproducible-report" class="level1">
-<h1><strong>Part B: Creating a reproducible report</strong></h1>
 <section id="introduction" class="level2">
 <h2 class="anchored" data-anchor-id="introduction"><strong>Introduction</strong></h2>
 <p>This report investigates whether higher marketing spend per customer leads to increased purchase amounts in an online retail setting. The dataset represents a personalised marketing campaign where spending varied across customers through channels such as advertisements, emails, and coupons. Businesses often face uncertainty in determining how much to invest in marketing to maximise returns without overspending. The findings will help determine whether increased spending generates meaningful returns or leads to diminishing benefits.</p>
 </section>
 <section id="research-question" class="level2">
-<h2 class="anchored" data-anchor-id="research-question"><strong>Research Question </strong></h2>
-<p><strong>Using markdown, discuss in 3 sentences maximum, the specific question that you are going to investigate or answer in this report using your selected data.</strong></p>
-<p>This report examines whether higher marketing spend per customer leads to greater purchase amounts.</p>
-<p>Specifically, it investigates the relationship between the amount spent on personalised marketing efforts and the revenue generated from each customer, motivated by the need for businesses to optimise marketing investment decisions.</p>
-<p>The analysis aims to determine whether increased spending results in higher returns or diminishing effectiveness.</p>
+<h2 class="anchored" data-anchor-id="research-question"><strong>Research Question</strong></h2>
+<p>This report examines whether higher marketing spend per customer leads to greater purchase amounts. Specifically, it investigates the relationship between the amount spent on personalised marketing efforts and the revenue generated from each customer, motivated by the need for businesses to optimise marketing investment decisions. The analysis aims to determine whether increased spending results in higher returns or diminishing effectiveness.</p>
 </section>
-<section id="dataset-introduction-section-3-points" class="level2">
-<h2 class="anchored" data-anchor-id="dataset-introduction-section-3-points"><strong>Dataset Introduction section (3 points)</strong></h2>
-<p><strong>In this section, briefly describe your data (i.e.&nbsp;what the data is measuring or recording) in five sentences maximum using markdown.</strong></p>
-<p>The dataset records customer-level information from a personalised marketing campaign, including marketing spend, purchase amount, and number of visits.</p>
-<p>The key variables of interest are marketing_spend, which represents the amount spent targeting each customer, and purchase_amount, which reflects the revenue generated from each customer.</p>
-<p>Additional variables such as visits, customer segment, and signup date provide further context on customer activity and characteristics but are not overly significant to this data set.</p>
-<p>Before analysis, the dataset was cleaned by - Removed rows with missing values in purchase amount because we’re measuring how higher marketing spend leads to higher purchase amount -standardising date formats -formatting numerical formats Irrelivant variables such as segment and notes were excluded due to their insignificance and irrelivance</p>
-<p>To do this, you will need to clean your dataset. Include a description of this cleaning process (not the code) in the report. The code to clean the dataset must be included in the Quarto file, but not in the report.</p>
-<p>#Initial Look at the data</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 150
-Columns: 7
-$ customer_id     &lt;chr&gt; "32592582_c0001", "32592582_c0002", "32592582_c0003", …
-$ signup_date     &lt;chr&gt; "16/4/2025", "2/6/2025", "18/12/2024", "Jan 15, 2026",…
-$ marketing_spend &lt;dbl&gt; 182.13, 6.66, 8.44, 165.83, 262.46, 180.34, 222.48, 21…
-$ visits          &lt;dbl&gt; 4, 6, 2, 4, 9, 8, 6, 5, 10, 4, 5, 1, 3, 5, 3, 3, 5, 8,…
-$ purchase_amount &lt;dbl&gt; 142.66, 37.94, 13.18, 182.01, 343.11, 161.66, 138.17, …
-$ segment         &lt;chr&gt; "Consumer", "SMB", "Consumer", "Consumer", "SMB", "Con…
-$ notes           &lt;chr&gt; "returned", NA, "N/A", NA, NA, NA, NA, NA, "N/A", NA, …</code></pre>
-</div>
-</div>
+<section id="dataset-introduction" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-introduction"><strong>Dataset Introduction</strong></h2>
+<p>The dataset records customer-level information from a personalised marketing campaign, including marketing spend, purchase amount, and number of visits. The key variables of interest are marketing_spend, which represents the amount spent targeting each customer, and purchase_amount, which reflects the revenue generated from each customer. Additional variables such as visits, customer segment, and signup date provide further context on customer activity and characteristics, although they are less central to the research question. Before analysis, the dataset was cleaned by removing rows with missing values in marketing_spend and purchase_amount, as these variables are essential to the investigation. Variable formats were standardised by converting marketing spend, purchase amount, and visits to numeric types, signup_date to a date, segment to a factor, and removing the notes variable as it was not relevant to the analysis.</p>
 </section>
-</section>
-<section id="clean-data" class="level1">
-<h1>Clean data</h1>
-<section id="dataset-description-subsection-5-points" class="level2">
-<h2 class="anchored" data-anchor-id="dataset-description-subsection-5-points"><strong>Dataset Description subsection (5 points)</strong></h2>
-<p><strong>Create a subsection that will report details about your data. You must include the size of the dataset such as the number of observations, variables and variable types. You must include a sentence that includes inline R code describing the number of variables and observations in your dataset.</strong></p>
-<p>The dataset contains <strong>132</strong> observations and <strong>6</strong> variables, capturing customer-level information from a personalised marketing campaign.</p>
-<p>The dataset includes a mix of numeric variables (e.g., marketing_spend, purchase_amount, visits), a categorical variable (segment), and a date variable (signup_date).</p>
-<p><strong>Create two other summaries of your data, one as a plot and one as a table. Examples include counts of certain variables in groups, or summary statistics of numeric variables. Make sure these summaries are providing a broader context to the report and are not just arbitrary commentaries.</strong></p>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_spend =</span> <span class="fu">mean</span>(marketing_spend),</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_purchase =</span> <span class="fu">mean</span>(purchase_amount),</span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">avg_visits =</span> <span class="fu">mean</span>(visits)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<section id="dataset-description-subsection" class="level2">
+<h2 class="anchored" data-anchor-id="dataset-description-subsection"><strong>Dataset Description Subsection</strong></h2>
+<p>The dataset contains <strong>132</strong> observations and <strong>6</strong> variables, capturing customer-level information from a personalised marketing campaign. It includes a mix of numeric variables (e.g., marketing_spend, purchase_amount, visits), a categorical variable (segment), and a date variable (signup_date). The segment variable categorises customers into groups such as Consumer, Enterprise, and SMB, enabling analysis of differences in marketing effectiveness and purchasing behaviour across customer types. Marketing spend ranges from <strong>$3.71</strong> to <strong>$299.13</strong>, while purchase amounts range from <strong>$0</strong> to <strong>$351.87</strong>. Customer visits range from <strong>1</strong> to <strong>12</strong>.</p>
+<div id="tbl-summary" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Summary statistics by customer segment
+</figcaption>
+<div aria-describedby="tbl-summary-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 1 × 3
-  avg_spend avg_purchase avg_visits
-      &lt;dbl&gt;        &lt;dbl&gt;      &lt;dbl&gt;
-1      152.         146.       5.33</code></pre>
+<pre><code>     segment average_spend average_purchase average_visits number_of_customers
+1   Consumer        156.46           147.11           5.51                  76
+2 Enterprise        151.38           136.48           4.94                  16
+3        SMB        145.16           147.19           5.15                  40</code></pre>
 </div>
 </div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>data <span class="sc">%&gt;%</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(segment) <span class="sc">%&gt;%</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">avg_purchase =</span> <span class="fu">mean</span>(purchase_amount))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 3 × 2
-  segment    avg_purchase
-  &lt;fct&gt;             &lt;dbl&gt;
-1 Consumer           147.
-2 Enterprise         136.
-3 SMB                147.</code></pre>
+</figure>
 </div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(data)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stdout">
-<pre><code> customer_id         signup_date         marketing_spend      visits      
- Length:132         Min.   :0001-02-20   Min.   :  3.71   Min.   : 1.000  
- Class :character   1st Qu.:0009-03-13   1st Qu.: 75.04   1st Qu.: 3.000  
- Mode  :character   Median :0018-06-04   Median :152.94   Median : 5.000  
-                    Mean   :0017-07-31   Mean   :152.42   Mean   : 5.333  
-                    3rd Qu.:0026-01-04   3rd Qu.:231.19   3rd Qu.: 7.000  
-                    Max.   :0031-08-20   Max.   :299.13   Max.   :12.000  
-                    NA's   :22                                            
- purchase_amount        segment  
- Min.   :  0.00   Consumer  :76  
- 1st Qu.: 84.04   Enterprise:16  
- Median :151.54   SMB       :40  
- Mean   :145.84                  
- 3rd Qu.:209.10                  
- Max.   :351.87                  
-                                 </code></pre>
-</div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> marketing_spend)) <span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">20</span>) <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">"Distribution of Marketing Spend"</span>,</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Marketing Spend"</span>,</span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Count"</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="Assignment-1-Quarto-Document_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="Assignment-1-Quarto-Document_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+<figcaption>Correlation between marketing spend and purchase amount</figcaption>
 </figure>
 </div>
 </div>
 </div>
 </section>
-</section>
-<section id="results-section" class="level1">
-<h1><strong>Results Section</strong></h1>
-<p><strong>Using visualisations of the data, discuss the answer to your research questions. You must:</strong> <strong>Create 2 figures maximum of your data that will help you answer your research question. Each figure must have a caption using the options inside the R code chunk. Create the figures using the ggplot2 package. The figures must have captions, and must be referred to in the text of the results section.</strong></p>
+<section id="results-section" class="level2">
+<h2 class="anchored" data-anchor-id="results-section"><strong>Results Section</strong></h2>
+<p>The results indicate that higher marketing spend is associated with higher purchase amounts across all customer segments. As shown in <a href="#fig-linear" class="quarto-xref">Figure&nbsp;1</a>, there is a clear positive relationship between marketing spend and purchase amount, with an overall correlation of <strong>0.83</strong>. While the overall direction of the relationship is consistent, there is noticeable variation in the spread of data points, particularly at higher levels of marketing spend, suggesting some differences in purchasing behavior within segments.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> marketing_spend, <span class="at">y =</span> purchase_amount)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.7</span>) <span class="sc">+</span></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"lm"</span>, <span class="at">se =</span> <span class="cn">TRUE</span>) <span class="sc">+</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Marketing Spend"</span>,</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Purchase Amount"</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`geom_smooth()` using formula = 'y ~ x'</code></pre>
-</div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Assignment-1-Quarto-Document_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-linear" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-linear-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Assignment-1-Quarto-Document_files/figure-html/fig-linear-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-linear-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: Linear Relationship Between Marketing Spend and Purchase Amount by Customer Segment
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
+<p><a href="#fig-curved" class="quarto-xref">Figure&nbsp;2</a> provides a clearer view of the underlying trends by smoothing the relationship between marketing spend and purchase amount for each segment. The Consumer and SMB segments display relatively steady increases in purchase amount as marketing spend rises, with average purchase amounts of <strong>$147.11</strong> and <strong>$147.19</strong>, respectively. In contrast, the Enterprise segment shows a less consistent pattern, with a flatter trend at mid-level spend and a lower average purchase amount of <strong>$136.48</strong>, before increasing more sharply at higher levels.</p>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> data <span class="sc">%&gt;%</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">spend_group =</span> <span class="fu">case_when</span>(</span>
-<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>      marketing_spend <span class="sc">&lt;</span> <span class="fu">quantile</span>(marketing_spend, <span class="fl">0.33</span>) <span class="sc">~</span> <span class="st">"Low"</span>,</span>
-<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>      marketing_spend <span class="sc">&lt;</span> <span class="fu">quantile</span>(marketing_spend, <span class="fl">0.67</span>) <span class="sc">~</span> <span class="st">"Medium"</span>,</span>
-<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">"High"</span></span>
-<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>    )</span>
-<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-</div>
-<div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> spend_group, <span class="at">y =</span> purchase_amount)) <span class="sc">+</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_boxplot</span>() <span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">"Marketing Spend Group"</span>,</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">"Purchase Amount"</span></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  )</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="Assignment-1-Quarto-Document_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<div id="fig-curved" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-curved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="Assignment-1-Quarto-Document_files/figure-html/fig-curved-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-curved-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: Varying Response of Purchase Amount to Marketing Spend Across Customer Segments
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p><strong>As well as the figures, you must also include a paragraph describing these results and how they link back to your research question. Remember, you can use inline code to extract certain numbers automatically.</strong></p>
+<p>Overall, these findings suggest that while increased marketing spend generally leads to higher purchase amounts, the strength and consistency of this relationship vary across segments. This indicates that the effectiveness of marketing investment may differ depending on customer type, but overall supports the conclusion that higher marketing spend is associated with increased customer purchases.</p>
 </section>
 
 </main>
