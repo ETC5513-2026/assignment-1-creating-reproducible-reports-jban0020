@@ -1,0 +1,36 @@
+---
+title: "Appendix"
+author: "Joshua Bannon"
+format: html
+editor: visual
+---
+## AI Use Statement
+
+Generative AI was used in a limited support capacity for this assignment. Its use was restricted to assisting with R code, such as troubleshooting errors, improving plot presentation, and refining existing code structure. All analysis, interpretation, and final decisions were completed independently.
+
+## Examples of AI Assistance
+
+- Troubleshooting R code errors
+- Suggesting improvements to ggplot visualisations
+- Assisting with formatting in Quarto
+
+## Screenshots of AI Queries and Interactions
+
+### Example 1
+![](appendix images/ai-query-1.png)
+
+### Example 2
+![](appendix images/ai-query-2.png)
+
+### Example 3
+![](appendix images/ai-query-3.png)
+
+### Example 4
+![](appendix images/ai-query-4.png)
+
+### Example 5
+![](appendix images/ai-query-5.png)
+
+
+### Example 6
+![](appendix images/ai-query-6.png)
