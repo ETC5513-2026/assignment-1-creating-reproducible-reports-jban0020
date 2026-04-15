@@ -15,23 +15,20 @@ library(knitr)
 library(rmarkdown)
 library(kableExtra)
 ```
+
 ## Brief
+
 You are the Head of Marketing for an online retailer. Over the last quarter we ran a personalised marketing campaign that varied how much we spent contacting individual customers (ads, emails, coupons). I want you to treat the data as the canonical record of that campaign and answer one question: did higher marketing spend per customer lead to higher purchase amounts?
 
 # **Part B: Creating a reproducible report**
 
 ## **Introduction**
+
 This report investigates whether higher marketing spend per customer leads to increased purchase amounts in an online retail setting. The dataset represents a personalised marketing campaign where spending varied across customers through channels such as advertisements, emails, and coupons. Businesses often face uncertainty in determining how much to invest in marketing to maximise returns without overspending. The findings will help determine whether increased spending generates meaningful returns or leads to diminishing benefits.
 
-## **Research Question **
+## **Research Question** 
 
-**Using markdown, discuss in 3 sentences maximum, the specific question that you are going to investigate or answer in this report using your selected data.**
-
-This report examines whether higher marketing spend per customer leads to greater purchase amounts.
-
-Specifically, it investigates the relationship between the amount spent on personalised marketing efforts and the revenue generated from each customer, motivated by the need for businesses to optimise marketing investment decisions.
-
-The analysis aims to determine whether increased spending results in higher returns or diminishing effectiveness.
+This report examines whether higher marketing spend per customer leads to greater purchase amounts. Specifically, it investigates the relationship between the amount spent on personalised marketing efforts and the revenue generated from each customer, motivated by the need for businesses to optimise marketing investment decisions. The analysis aims to determine whether increased spending results in higher returns or diminishing effectiveness.
 
 ## **Dataset Introduction section (3 points)**
 
@@ -51,12 +48,15 @@ To do this, you will need to clean your dataset. Include a description of this c
 #Load in the data
 data <- read_csv("data/32592582_Joshua Bannon.csv")
 ```
+
 #Initial Look at the data
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 glimpse(data)
 ```
 
 # Clean data
+
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 data <- data %>%
   drop_na(marketing_spend, purchase_amount)
@@ -74,7 +74,7 @@ data <- data %>%
   distinct()
 ```
 
-## **Dataset Description subsection (5 points)**
+### **Dataset Description subsection (5 points)**
 
 **Create a subsection that will report details about your data. You must include the size of the dataset such as the number of observations, variables and variable types. You must include a sentence that includes inline R code describing the number of variables and observations in your dataset.**
 
