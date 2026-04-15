@@ -1,6 +1,6 @@
 ---
 title: "Assignment 1"
-author: "Josh Bannon"
+author: "Joshua Bannon"
 format: 
   html: default
   pdf: default
@@ -15,6 +15,7 @@ library(knitr)
 library(rmarkdown)
 library(kableExtra)
 ```
+
 ## **Introduction**
 
 This report investigates whether higher marketing spend per customer leads to increased purchase amounts in an online retail setting. The dataset represents a personalised marketing campaign where spending varied across customers through channels such as advertisements, emails, and coupons. Businesses often face uncertainty in determining how much to invest in marketing to maximise returns without overspending. The findings will help determine whether increased spending generates meaningful returns or leads to diminishing benefits.
@@ -25,7 +26,7 @@ This report examines whether higher marketing spend per customer leads to greate
 
 ## **Dataset Introduction**
 
-The dataset records customer-level information from a personalised marketing campaign, including marketing spend, purchase amount, and number of visits. The key variables of interest are marketing_spend, which represents the amount spent targeting each customer, and purchase_amount, which reflects the revenue generated from each customer. Additional variables such as visits, customer segment, and signup date provide further context on customer activity and characteristics but are not overly relevant to the research question. Before analysis, the dataset was cleaned by removing rows with missing values in purchase amount because we're measuring how higher marketing spend leads to higher purchase amount, we then standardised date formats as well as formatting numerical formats. Irrelivant variables such as segment and notes were excluded due to their insignificance and irrelivance
+The dataset records customer-level information from a personalised marketing campaign, including marketing spend, purchase amount, and number of visits. The key variables of interest are marketing_spend, which represents the amount spent targeting each customer, and purchase_amount, which reflects the revenue generated from each customer. Additional variables such as visits, customer segment, and signup date provide further context on customer activity and characteristics but are not overly relevant to the research question. Before analysis, the dataset was cleaned by removing rows with missing values in purchase amount because we're measuring how higher marketing spend leads to higher purchase amount, we then standardised date formats as well as formatting numerical formats. Irrelivant variables such as signup_date and notes were excluded due to their insignificance and irrelivance
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Reading in the data
@@ -56,11 +57,12 @@ data <- data %>%
   distinct()
 ```
 
-### **Dataset Description subsection**
+## **Dataset Description Subsection**
 
-The dataset contains **`r nrow(data)`** observations and **`r ncol(data)`** variables, capturing customer-level information from a personalised marketing campaign. It includes a mix of numeric variables (e.g., marketing_spend, purchase_amount, visits), a categorical variable (segment), and a date variable (signup_date). Marketing spend ranges from **$`r min(data$marketing_spend)`** to **$`r max(data$marketing_spend)`**, while purchase amounts range from **$`r min(data$purchase_amount)`** to **$`r max(data$purchase_amount)`**. Customer visits range from **`r min(data$visits)`** to **`r max(data$visits)`**.
+The dataset contains **`r nrow(data)`** observations and **`r ncol(data)`** variables, capturing customer-level information from a personalised marketing campaign. It includes a mix of numeric variables (e.g., marketing_spend, purchase_amount, visits), a categorical variable (segment), and a date variable (signup_date). The segment variable categorises customers into groups such as Consumer, Enterprise, and SMB, enabling analysis of differences in marketing effectiveness and purchasing behaviour across customer types. Marketing spend ranges from **$`r min(data$marketing_spend)`** to **$`r max(data$marketing_spend)`**, while purchase amounts range from **$`r min(data$purchase_amount)`** to **$`r max(data$purchase_amount)`**. Customer visits range from **`r min(data$visits)`** to **`r max(data$visits)`**.
 
-```{R}
+**Table 1: Summary statistics by customer segment**
+```{r echo=FALSE, message=FALSE}
 data %>%
   group_by(segment) %>%
   summarise(
@@ -73,12 +75,13 @@ data %>%
   as.data.frame()
 ```
 
-```{r}
+**Figure 1: Correlation between marketing spend and purchase amount by segment**
+```{r echo=FALSE, message=FALSE, fig.align='center'}
+#| fig-cap: "Figure.1: Correlation between marketing spend and purchase amount by segment"
 ggplot(data, aes(x = marketing_spend, y = purchase_amount)) +
   geom_point(colour = "steelblue") +
   geom_smooth(method = "lm", se = FALSE, colour = "red") +
   labs(
-    title = "Relationship Between Marketing Spend & Purchase Amount",
     x = "Marketing Spend ($)",
     y = "Purchase Amount ($)"
   ) +
@@ -87,38 +90,43 @@ ggplot(data, aes(x = marketing_spend, y = purchase_amount)) +
   )
 ```
 
-# **Results Section**
+## **Results Section**
 
-**Using visualisations of the data, discuss the answer to your research questions. You must:** **Create 2 figures maximum of your data that will help you answer your research question. Each figure must have a caption using the options inside the R code chunk. Create the figures using the ggplot2 package. The figures must have captions, and must be referred to in the text of the results section.**
-
-```{r}
-ggplot(data, aes(x = marketing_spend, y = purchase_amount)) +
-  geom_point(alpha = 0.7) +
-  geom_smooth(method = "lm", se = TRUE) +
+The results indicate that higher marketing spend is associated with higher purchase amounts across all customer segments. As shown in @fig-linear, there is a clear positive relationship between marketing spend and purchase amount, with an overall correlation of **`r round(cor(data$marketing_spend, data$purchase_amount), 2)`**. While the overall direction of the relationship is consistent, there is noticeable variation in the spread of data points, particularly at higher levels of marketing spend, suggesting some differences in purchasing behavior within segments.
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+#| label: "fig-linear"
+#| fig-cap: "Linear Relationship Between Marketing Spend and Purchase Amount by Customer Segment"
+ggplot(data, aes(x = marketing_spend, y = purchase_amount, colour = segment)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm", se = FALSE) +
   labs(
-    x = "Marketing Spend",
-    y = "Purchase Amount"
+    title = "Marketing Spend and Purchase Amount Correlation by Segment",
+    x = "Marketing Spend ($)",
+    y = "Purchase Amount ($)",
+    colour = "Segment"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold")
   )
 ```
 
-```{r}
-data <- data %>%
-  mutate(
-    spend_group = case_when(
-      marketing_spend < quantile(marketing_spend, 0.33) ~ "Low",
-      marketing_spend < quantile(marketing_spend, 0.67) ~ "Medium",
-      TRUE ~ "High"
-    )
-  )
-```
+@fig-curved provides a clearer view of the underlying trends by smoothing the relationship between marketing spend and purchase amount for each segment. The Consumer and SMB segments display relatively steady increases in purchase amount as marketing spend rises, with average purchase amounts of **$`r round(mean(data$purchase_amount[data$segment == "Consumer"]), 2)`** and **$`r round(mean(data$purchase_amount[data$segment == "SMB"]), 2)`**, respectively. In contrast, the Enterprise segment shows a less consistent pattern, with a flatter trend at mid-level spend and a lower average purchase amount of **$`r round(mean(data$purchase_amount[data$segment == "Enterprise"]), 2)`**, before increasing more sharply at higher levels. 
 
-```{r}
-ggplot(data, aes(x = spend_group, y = purchase_amount)) +
-  geom_boxplot() +
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+#| label: "fig-curved"
+#| fig-cap: "Varying Response of Purchase Amount to Marketing Spend Across Customer Segments"
+
+ggplot(data, aes(x = marketing_spend, y = purchase_amount, colour = segment)) +
+  geom_smooth(se = FALSE, linewidth = 1) +
   labs(
-    x = "Marketing Spend Group",
-    y = "Purchase Amount"
+    title = "Trend Between Marketing Spend and Purchase Amount by Segment",
+    x = "Marketing Spend ($)",
+    y = "Purchase Amount ($)",
+    colour = "Segment"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold")
   )
 ```
 
-**As well as the figures, you must also include a paragraph describing these results and how they link back to your research question. Remember, you can use inline code to extract certain numbers automatically.**
+Overall, these findings suggest that while increased marketing spend generally leads to higher purchase amounts, the strength and consistency of this relationship vary across segments. This indicates that the effectiveness of marketing investment may differ depending on customer type, but overall supports the conclusion that higher marketing spend is associated with increased customer purchases.
