@@ -1,5 +1,5 @@
 ---
-title: "Assignment 1 Quarto Document"
+title: "Assignment 1"
 author: "Josh Bannon"
 format: 
   html: default
@@ -15,54 +15,36 @@ library(knitr)
 library(rmarkdown)
 library(kableExtra)
 ```
-
-## Brief
-
-You are the Head of Marketing for an online retailer. Over the last quarter we ran a personalised marketing campaign that varied how much we spent contacting individual customers (ads, emails, coupons). I want you to treat the data as the canonical record of that campaign and answer one question: did higher marketing spend per customer lead to higher purchase amounts?
-
-# **Part B: Creating a reproducible report**
-
 ## **Introduction**
 
 This report investigates whether higher marketing spend per customer leads to increased purchase amounts in an online retail setting. The dataset represents a personalised marketing campaign where spending varied across customers through channels such as advertisements, emails, and coupons. Businesses often face uncertainty in determining how much to invest in marketing to maximise returns without overspending. The findings will help determine whether increased spending generates meaningful returns or leads to diminishing benefits.
 
-## **Research Question** 
+## **Research Question**
 
 This report examines whether higher marketing spend per customer leads to greater purchase amounts. Specifically, it investigates the relationship between the amount spent on personalised marketing efforts and the revenue generated from each customer, motivated by the need for businesses to optimise marketing investment decisions. The analysis aims to determine whether increased spending results in higher returns or diminishing effectiveness.
 
-## **Dataset Introduction section (3 points)**
+## **Dataset Introduction**
 
-**In this section, briefly describe your data (i.e. what the data is measuring or recording) in five sentences maximum using markdown.**
-
-The dataset records customer-level information from a personalised marketing campaign, including marketing spend, purchase amount, and number of visits.
-
-The key variables of interest are marketing_spend, which represents the amount spent targeting each customer, and purchase_amount, which reflects the revenue generated from each customer.
-
-Additional variables such as visits, customer segment, and signup date provide further context on customer activity and characteristics but are not overly significant to this data set.
-
-Before analysis, the dataset was cleaned by - Removed rows with missing values in purchase amount because we're measuring how higher marketing spend leads to higher purchase amount -standardising date formats -formatting numerical formats Irrelivant variables such as segment and notes were excluded due to their insignificance and irrelivance
-
-To do this, you will need to clean your dataset. Include a description of this cleaning process (not the code) in the report. The code to clean the dataset must be included in the Quarto file, but not in the report.
+The dataset records customer-level information from a personalised marketing campaign, including marketing spend, purchase amount, and number of visits. The key variables of interest are marketing_spend, which represents the amount spent targeting each customer, and purchase_amount, which reflects the revenue generated from each customer. Additional variables such as visits, customer segment, and signup date provide further context on customer activity and characteristics but are not overly relevant to the research question. Before analysis, the dataset was cleaned by removing rows with missing values in purchase amount because we're measuring how higher marketing spend leads to higher purchase amount, we then standardised date formats as well as formatting numerical formats. Irrelivant variables such as segment and notes were excluded due to their insignificance and irrelivance
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
-#Load in the data
+# Reading in the data
 data <- read_csv("data/32592582_Joshua Bannon.csv")
 ```
 
-#Initial Look at the data
-
-```{r echo=FALSE, message=FALSE, warning=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE, eval=FALSE}
+# Initial look at the data
 glimpse(data)
 ```
 
-# Clean data
-
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Removing rows with missing values in marketing_spend and purchase_amount
 data <- data %>%
   drop_na(marketing_spend, purchase_amount)
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Standardising variable formats and removing irrelevant variables
 data <- data %>%
   mutate(
     marketing_spend = as.numeric(marketing_spend),
@@ -74,43 +56,35 @@ data <- data %>%
   distinct()
 ```
 
-### **Dataset Description subsection (5 points)**
+### **Dataset Description subsection**
 
-**Create a subsection that will report details about your data. You must include the size of the dataset such as the number of observations, variables and variable types. You must include a sentence that includes inline R code describing the number of variables and observations in your dataset.**
+The dataset contains **`r nrow(data)`** observations and **`r ncol(data)`** variables, capturing customer-level information from a personalised marketing campaign. It includes a mix of numeric variables (e.g., marketing_spend, purchase_amount, visits), a categorical variable (segment), and a date variable (signup_date). Marketing spend ranges from **$`r min(data$marketing_spend)`** to **$`r max(data$marketing_spend)`**, while purchase amounts range from **$`r min(data$purchase_amount)`** to **$`r max(data$purchase_amount)`**. Customer visits range from **`r min(data$visits)`** to **`r max(data$visits)`**.
 
-The dataset contains **`r nrow(data)`** observations and **`r ncol(data)`** variables, capturing customer-level information from a personalised marketing campaign.
-
-The dataset includes a mix of numeric variables (e.g., marketing_spend, purchase_amount, visits), a categorical variable (segment), and a date variable (signup_date).
-
-**Create two other summaries of your data, one as a plot and one as a table. Examples include counts of certain variables in groups, or summary statistics of numeric variables. Make sure these summaries are providing a broader context to the report and are not just arbitrary commentaries.**
-
-```{r}
-data %>%
-  summarise(
-    avg_spend = mean(marketing_spend),
-    avg_purchase = mean(purchase_amount),
-    avg_visits = mean(visits)
-  )
-```
-
-```{r}
+```{R}
 data %>%
   group_by(segment) %>%
-  summarise(avg_purchase = mean(purchase_amount))
+  summarise(
+    average_spend = round(mean(marketing_spend), 2),
+    average_purchase = round(mean(purchase_amount), 2),
+    average_visits = round(mean(visits), 2),
+    number_of_customers = n(),
+    .groups = "drop"
+  ) %>%
+  as.data.frame()
 ```
 
 ```{r}
-summary(data)
-```
-
-```{r}
-ggplot(data, aes(x = marketing_spend)) +
-  geom_histogram(bins = 20) +
+ggplot(data, aes(x = marketing_spend, y = purchase_amount)) +
+  geom_point(colour = "steelblue") +
+  geom_smooth(method = "lm", se = FALSE, colour = "red") +
   labs(
-    title = "Distribution of Marketing Spend",
-    x = "Marketing Spend",
-    y = "Count"
-)
+    title = "Relationship Between Marketing Spend & Purchase Amount",
+    x = "Marketing Spend ($)",
+    y = "Purchase Amount ($)"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(face = "bold", hjust = 0.5)
+  )
 ```
 
 # **Results Section**
